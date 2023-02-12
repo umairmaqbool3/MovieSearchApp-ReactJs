@@ -53,6 +53,7 @@ const App = () => {
         type="search"
         value={search}
         onChange={changeTheSearch}
+        placeholder="Enter movie name..."
         className="w-full border border-black rounded text-slate-700 p-3"
       />
       {
