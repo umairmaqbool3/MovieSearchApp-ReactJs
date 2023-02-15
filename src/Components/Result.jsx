@@ -1,12 +1,30 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Result = (props) => {
   const [movieDetail, setMovieDetail] = useState(false);
+  const [singleMovie, setSingleMovie] = useState({});
+
+  const clickedMovie = (props, index) => {
+    setMovieDetail(true);
+    console.log("index is ", index);
+    axios
+      .get(
+        `https://api.themoviedb.org/3/movie/${index}?api_key=04c35731a5ee918f014970082a0088b1&language=en-US`
+      )
+      .then((response) => {
+        console.log(response.data);
+        setSingleMovie(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const boxes = props.movies.map((item, index) => {
     return (
       <Box
-        onClick={() => setMovieDetail(true)}
+        onClick={() => clickedMovie(item, item.id)}
         key={index}
         image={item.poster_path}
         title={item.original_title}
@@ -15,8 +33,15 @@ const Result = (props) => {
     );
   });
   return (
-    <div className="w-full grid md:grid-cols-4 gap-4 mt-5">
-      {movieDetail ? <MovieDetail /> : boxes}
+    <div className="w-full mt-5">
+      {movieDetail ? (
+        <MovieDetail
+          title={singleMovie.title}
+          image={singleMovie.backdrop_path}
+        />
+      ) : (
+        <div className="w-full grid md:grid-cols-4 gap-4">{boxes}</div>
+      )}
     </div>
   );
 };
@@ -37,18 +62,13 @@ const Box = (props) => {
 };
 
 const MovieDetail = (props) => {
-  // function getMovieDetail() {
-  //   axios
-  //     .get(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=<<api_key>>&language=en-US`)
-  //     .then((response) => {
-  //       // console.log(response.data.results)
-  //       setMovies(response.data.results);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
-  return <div className="text-4xl shadow">This is movie detail page</div>;
+  const IMGPATH = "https://image.tmdb.org/t/p/w1280";
+  return (
+    <div className="w-full grid md:grid-cols-3 gap-4 mt-5">
+      <img src={IMGPATH + props.image} alt="" className="w-full" />
+      <h2 className="text-4xl w-full">{props.title}</h2>
+    </div>
+  );
 };
 
 export default Result;
