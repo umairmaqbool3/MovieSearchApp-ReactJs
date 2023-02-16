@@ -37,7 +37,7 @@ const Result = (props) => {
       {movieDetail ? (
         <MovieDetail
           title={singleMovie.title}
-          image={singleMovie.backdrop_path}
+          image={singleMovie.poster_path}
         />
       ) : (
         <div className="w-full grid md:grid-cols-4 gap-4">{boxes}</div>
@@ -65,8 +65,8 @@ const MovieDetail = (props) => {
   const IMGPATH = "https://image.tmdb.org/t/p/w1280";
   return (
     <div className="w-full grid md:grid-cols-3 gap-4 mt-5">
-      <img src={IMGPATH + props.image} alt="" className="w-full" />
-      <h2 className="text-4xl w-full">{props.title}</h2>
+      <img src={IMGPATH + props.image} alt="" className="w-full grid-cols-1 rounded-2xl hover:shadow-2xl" />
+      <h2 className="text-4xl grid-cols-2">{props.title}</h2>
     </div>
   );
 };
