@@ -35,10 +35,21 @@ const Result = (props) => {
   return (
     <div className="w-full mt-5">
       {movieDetail ? (
-        <MovieDetail
-          title={singleMovie.title}
-          image={singleMovie.poster_path}
-        />
+        <div>
+          <button
+            onClick={() => setMovieDetail(false)}
+            className="transition ease-in-out delay-150 bg-blue-500 p-2 rounded-lg text-white font-bold hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+          >
+            Go back
+          </button>
+          <MovieDetail
+            title={singleMovie.title}
+            image={singleMovie.poster_path}
+            status={singleMovie.status}
+            releaseDate = {singleMovie.release_date}
+            genres={singleMovie.genres}
+          />
+        </div>
       ) : (
         <div className="w-full grid md:grid-cols-4 gap-4">{boxes}</div>
       )}
@@ -64,9 +75,22 @@ const Box = (props) => {
 const MovieDetail = (props) => {
   const IMGPATH = "https://image.tmdb.org/t/p/w1280";
   return (
-    <div className="w-full grid md:grid-cols-3 gap-4 mt-5">
-      <img src={IMGPATH + props.image} alt="" className="w-full grid-cols-1 rounded-2xl hover:shadow-2xl" />
-      <h2 className="text-4xl grid-cols-2">{props.title}</h2>
+    <div className="w-full grid grid-cols-4 gap-4 mt-5">
+      <img
+        src={IMGPATH + props.image}
+        alt=""
+        className="w-full  rounded-2xl hover:shadow-2xl"
+      />
+      <div className="col-span-3">
+        <h2 className="text-4xl font-bold">{props.title}</h2>
+        <p className="text-xl ">{props.status}</p>
+        <p className="text-xl ">{props.releaseDate}</p>
+        {/* { props.genres.map((item)=>{
+          return(
+          <p>{item.name}</p>
+          )
+        })} */}
+      </div>
     </div>
   );
 };
