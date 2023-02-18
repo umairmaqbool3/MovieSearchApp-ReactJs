@@ -4,6 +4,7 @@ import axios from "axios";
 const Result = (props) => {
   const [movieDetail, setMovieDetail] = useState(false);
   const [singleMovie, setSingleMovie] = useState({});
+  const [genres, setGenres] = useState([])
 
   const clickedMovie = (props, index) => {
     setMovieDetail(true);
@@ -14,6 +15,7 @@ const Result = (props) => {
       )
       .then((response) => {
         console.log(response.data);
+        setGenres(response.data.genres)
         setSingleMovie(response.data);
       })
       .catch((error) => {
@@ -32,6 +34,7 @@ const Result = (props) => {
       />
     );
   });
+
   return (
     <div className="w-full mt-5">
       {movieDetail ? (
@@ -47,7 +50,7 @@ const Result = (props) => {
             image={singleMovie.poster_path}
             status={singleMovie.status}
             releaseDate = {singleMovie.release_date}
-            genres={singleMovie.genres}
+            genres = {genres}
           />
         </div>
       ) : (
@@ -83,13 +86,12 @@ const MovieDetail = (props) => {
       />
       <div className="col-span-3">
         <h2 className="text-4xl font-bold">{props.title}</h2>
-        <p className="text-xl ">{props.status}</p>
-        <p className="text-xl ">{props.releaseDate}</p>
-        {/* { props.genres.map((item)=>{
+        <p className="text-xl mb-2">{props.status} on {props.releaseDate}</p>
+        { props.genres.map((item)=>{
           return(
-          <p>{item.name}</p>
+            <span className="mr-2 border border-spacing-1 border-black rounded-xl px-2 p-1 ">{item.name}</span>
           )
-        })} */}
+        })}
       </div>
     </div>
   );
