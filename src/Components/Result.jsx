@@ -51,6 +51,7 @@ const Result = (props) => {
             status={singleMovie.status}
             releaseDate = {singleMovie.release_date}
             genres = {genres}
+            overview = {singleMovie.overview}
           />
         </div>
       ) : (
@@ -88,10 +89,14 @@ const MovieDetail = (props) => {
         <h2 className="text-4xl font-bold">{props.title}</h2>
         <p className="text-xl mb-2">{props.status} on {props.releaseDate}</p>
         { props.genres.map((item)=>{
+          const bgc = '#' +  Math.random().toString(16).substr(-6);
+          console.log("bgc : ", bgc)
           return(
-            <span className="mr-2 border border-spacing-1 border-black rounded-xl px-2 p-1 ">{item.name}</span>
+            <span className="mr-2 border border-spacing-1 border-[bgc] rounded-xl px-2 p-1 ">{item.name}</span>
           )
         })}
+        <h4 className="font-bold mt-5">Overview</h4>
+        <p>{props.overview}</p>
       </div>
     </div>
   );
