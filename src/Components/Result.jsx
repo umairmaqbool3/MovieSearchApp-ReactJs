@@ -92,7 +92,7 @@ const MovieDetail = (props) => {
           const bgc = '#' +  Math.random().toString(16).substr(-6);
           console.log("bgc : ", bgc)
           return(
-            <span className="mr-2 border border-spacing-1 border-[bgc] rounded-xl px-2 p-1 ">{item.name}</span>
+            <span className="mr-2 border border-spacing-1 border-blue-500 rounded-xl px-2 p-1 ">{item.name}</span>
           )
         })}
         <h4 className="font-bold mt-5">Overview</h4>
