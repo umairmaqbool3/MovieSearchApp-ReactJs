@@ -52,6 +52,8 @@ const Result = (props) => {
             releaseDate = {singleMovie.release_date}
             genres = {genres}
             overview = {singleMovie.overview}
+            budget = {singleMovie.budget}
+            revenue = {singleMovie.revenue}
           />
         </div>
       ) : (
@@ -89,14 +91,18 @@ const MovieDetail = (props) => {
         <h2 className="text-4xl font-bold">{props.title}</h2>
         <p className="text-xl mb-2">{props.status} on {props.releaseDate}</p>
         { props.genres.map((item)=>{
-          const bgc = '#' +  Math.random().toString(16).substr(-6);
-          console.log("bgc : ", bgc)
+          // const bgc = '#' +  Math.random().toString(16).substr(-6);
+          // console.log("bgc : ", bgc)
           return(
             <span className="mr-2 border border-spacing-1 border-blue-500 rounded-xl px-2 p-1 ">{item.name}</span>
           )
         })}
         <h4 className="font-bold mt-5">Overview</h4>
         <p>{props.overview}</p>
+        <h4 className="font-bold mt-5">Budget</h4>
+        <span>${props.budget.toLocaleString("en-US")}</span>
+        <h4 className="font-bold mt-5">Revenue</h4>
+        <span>${props.revenue.toLocaleString("en-US")}</span>
       </div>
     </div>
   );
